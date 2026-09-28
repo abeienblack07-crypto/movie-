@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMAX - Stream Movies & TV Shows</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" id="logo-btn">CINEMA<span>X</span></a>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="#" class="nav-link active" data-filter="all">Home</a>
+                <a href="#" class="nav-link" data-filter="Popular">Movies</a>
+                <a href="#" class="nav-link" data-filter="Trending">TV Shows</a>
+                <a href="#genres-section" class="nav-link">Genres</a>
+                <a href="#" class="nav-link" data-filter="Trending">Trending</a>
+                <a href="#" class="nav-link" id="watchlist-nav-btn">Watchlist <span id="watchlist-count" class="badge">0</span></a>
+            </nav>
+
+            <div class="nav-right">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search movies...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+                <button class="btn btn-primary" id="open-login-btn">Login</button>
+                <div class="hamburger" id="hamburger-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        
+        <section class="hero" id="hero-section">
+            <div class="hero-backdrop" id="hero-backdrop"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="badge badge-accent" id="hero-genre">Action</span>
+                <h1 class="hero-title" id="hero-title">Loading Featured Movie...</h1>
+                <div class="hero-meta">
+                    <span id="hero-rating"><i class="fa-solid fa-star text-gold"></i> 0.0</span>
+                    <span id="hero-year">2026</span>
+                    <span id="hero-duration">0h 0m</span>
+                </div>
+                <p class="hero-description" id="hero-description">Loading overview...</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg" id="hero-watch-btn"><i class="fa-solid fa-play"></i> Watch Now</button>
+                    <button class="btn btn-secondary btn-lg" id="hero-trailer-btn"><i class="fa-solid fa-film"></i> Trailer</button>
+                    <button class="btn btn-icon btn-lg" id="hero-watchlist-btn"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="continue-watching-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Continue Watching</h2>
+            </div>
+            <div class="movie-grid" id="continue-watching-grid"></div>
+        </section>
+
+        <section class="section" id="genres-section">
+            <div class="section-header">
+                <h2 class="section-title">Explore Categories</h2>
+            </div>
+            <div class="genre-pills-container" id="genre-pills">
+                </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title" id="grid-heading">All Movies</h2>
+            </div>
+            <div class="movie-grid" id="movie-grid">
+                </div>
+            <div class="no-results" id="no-results" style="display: none;">
+                <i class="fa-solid fa-film-slash"></i>
+                <h3>No Movies Found</h3>
+                <p>Try searching for a different title or select another genre filter.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="watch-page" class="watch-page" style="display: none;">
+        <div class="watch-header">
+            <button class="btn btn-secondary" id="back-from-watch"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <h2 id="watch-movie-title" class="watch-title">Movie Title</h2>
+        </div>
+        <div class="video-container">
+            <video id="main-video-player" controls poster="">
+                <source id="video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="watch-details-container">
+            <div class="watch-info">
+                <div class="meta-row">
+                    <span class="badge" id="watch-genre">Genre</span>
+                    <span id="watch-rating"><i class="fa-solid fa-star text-gold"></i> 0.0</span>
+                    <span id="watch-year">2026</span>
+                    <span id="watch-duration">0h 0m</span>
+                </div>
+                <p id="watch-description">Movie synopsis will appear here.</p>
+            </div>
+            <div class="related-section">
+                <h3>More Like This</h3>
+                <div class="movie-grid grid-compact" id="related-movies-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="details-modal">
+        <div class="modal-container modal-lg">
+            <button class="modal-close" id="close-details-modal">&times;</button>
+            <div class="modal-backdrop" id="modal-backdrop"></div>
+            <div class="modal-content-wrapper">
+                <div class="modal-poster-col">
+                    <img id="modal-poster" src="" alt="Movie Poster">
+                </div>
+                <div class="modal-info-col">
+                    <h2 id="modal-title" class="modal-title">Title</h2>
+                    <div class="hero-meta">
+                        <span id="modal-rating"><i class="fa-solid fa-star text-gold"></i> 0.0</span>
+                        <span id="modal-year">2026</span>
+                        <span id="modal-duration">0h 0m</span>
+                    </div>
+                    <div class="genre-tags" id="modal-genres"></div>
+                    <p id="modal-description" class="modal-description">Description text...</p>
+                    <div class="cast-crew-info">
+                        <p><strong>Director:</strong> <span id="modal-director">N/A</span></p>
+                        <p><strong>Cast:</strong> <span id="modal-cast">N/A</span></p>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary" id="modal-watch-btn"><i class="fa-solid fa-play"></i> Watch Now</button>
+                        <button class="btn btn-secondary" id="modal-trailer-btn"><i class="fa-solid fa-film"></i> Trailer</button>
+                        <button class="btn btn-outline" id="modal-watchlist-btn"><i class="fa-solid fa-plus"></i> Watchlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-container modal-sm glassmorphism">
+            <button class="modal-close" id="close-login-modal">&times;</button>
+            <div class="auth-box">
+                <h2 id="auth-title">Welcome Back</h2>
+                <form id="auth-form">
+                    <div class="form-group">
+                        <label for="auth-email">Email</label>
+                        <input type="email" id="auth-email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="auth-password">Password</label>
+                        <input type="password" id="auth-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="toggle-auth-mode">Register</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">CINEMA<span>X</span></a>
+                <p>Your ultimate destination for high-quality, legal cinematic entertainment.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Trending</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">DMCA Notice</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CINEMAX. All rights reserved. Powered by HTML5, CSS3, & Vanilla JS.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
